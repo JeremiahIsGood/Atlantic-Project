@@ -7,3 +7,33 @@ Jeremiah:
 
 
 Zayan:
+
+
+Work Plan:
+
+Phase 1: Data Gathering & Scraping (The Foundation) and Basic Regression Model Set Up and Fine Tuning
+    Get public housing price data and preprocess it.
+    Create the web scraper using BeautifulSoup and requests to get repair and cost data.
+    Cleans the scraped data and split into categories (positive, negative, both).
+    Build the KNN or XG Boost or Random Forest model (start with KNN because we can explain it and their is less stress for presentation questions)
+    Perform hyperparameter tuning on the model.
+
+Phase 2: NLP & Logic Setup (The Hardest Part)
+    Build the system that reads text and extracts the main type of repair.
+    Clean the text, sentence segmentation, use lemmatization or stemming and then POS or NER tagging. Use Word2Vec embedding.
+    Get the Nouns and see if they match a repair or upgrade the repair\upgrade dataset and get Price.
+    We need to use sentiment analysis or something like that to determine if the text is like a complaint or not.
+    Determining whether the sentiment is good for each sentence and based on the category, update the price.
+
+Phase 3: Integration
+    Make sure to add comments and citation on code
+    Create the basic Web App
+    Save the models and create a script to load them on startup.
+    Use FastAPI to predict and do other calls using the models.
+    (Extra Time: Make the graphics nice using CSS)
+    Test That the App overall Works
+
+Phase 4: Presentation
+    Prepare for Presentation Questions
+    Create Presentation Slides.
+    Demonstrate the App during presentation (Live or Video Recording)

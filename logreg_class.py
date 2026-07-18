@@ -32,7 +32,9 @@ def get_wordnet_pos(tag):
 
 class LogRegTfidfModel:
     def __init__(self):
-        self.pred = None
+        self.pred_label = None
+        self.pred_conf = None
+        self.pred_number = None
         self.model = joblib.load("tfidf_logreg_model.pkl")
 
     def predict(self, text):
@@ -56,5 +58,23 @@ class LogRegTfidfModel:
         elif pred == 2:
             state =  "Positive"
 
-        self.pred = (state, (prob_arr[pred][0]))
-        print(f"** LogReg-Tfidf Model **\nPredicted Sentiment: {self.pred[0]}\nConfidence: %{(prob_arr[pred][0] * 100):.2f}")
+        self.pred_label = state
+        self.pred_conf = (prob_arr[pred][0])
+        self.pred_number = self.convert_label_to_numb()
+
+    def print_prediction(self):
+        print(f"** LogReg-Tfidf Model **\nPredicted Sentiment: {self.pred_label}\nConfidence: %{(self.pred_conf * 100):.2f}")
+
+    def convert_to_label(self):
+        if self.pred_number == 0:
+            return "Negative"
+        elif self.pred_number == 1:
+            return "Neutral"
+        return "Positive"
+
+    def convert_label_to_numb(self):
+        if self.pred_label == "Negative":
+            return 0
+        elif self.pred_label == "Neutral":
+            return 1
+        return 2

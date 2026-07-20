@@ -1,0 +1,688 @@
+item,sentiment,avg_cost
+install shower stall,2,8000.0
+home automation,1,4000.0
+install roof shingle,2,14500.0
+hardwood floor repair,1,2000.0
+concrete foundation,1,6000.0
+repair boiler,1,450.0
+yard clean service,1,350.0
+bee nest removal,0,550.0
+dryer installation,2,1100.0
+cool roof,1,10000.0
+flood basement cleanup,0,4000.0
+chain link fence,1,3000.0
+coffered ceiling installation,2,5000.0
+refrigerator repair,1,400.0
+vault ceiling,2,20000.0
+locksmith service,1,150.0
+window frame repair,1,300.0
+side cost calculator,1,14500.0
+indirect water heater,1,1400.0
+hardwood floor refinish,2,1200.0
+window cleaning,1,310.0
+carpet stair,1,650.0
+pressure wash driveway,1,225.0
+cricket extermination,0,223.0
+picket fence,1,1981.0
+paint wall mural,1,4800.0
+tv repair,1,100.0
+install vinyl floor,2,1400.0
+freezer repair,1,200.0
+build gazebo,2,8750.0
+poison ivy removal,0,500.0
+pool remodel,2,15000.0
+paint bathroom,0,300.0
+whole house fan installation,2,1700.0
+solar panel repair,2,750.0
+window repair,1,400.0
+home window tint,1,150.0
+glass block window installation,2,800.0
+fence repair,1,500.0
+concrete floor coating,1,3000.0
+cork floor installation,2,2125.0
+bird removal,0,500.0
+dryer vent installation,2,150.0
+aluminum trim,1,176.0
+heat pump repair,1,400.0
+paint house exterior florida,1,5750.0
+build chicken coop,2,650.0
+murphy bed installation,2,3000.0
+termite exterminator,0,680.0
+mosquito control,1,518.0
+flower bed,1,2150.0
+fire damage recovery,0,11900.0
+suspend acoustic ceiling installation,2,1494.0
+custom cabinet installation,2,18600.0
+install zinc gutter,2,6000.0
+solar pool heater installation,2,4000.0
+hvac maintenance,1,275.0
+install video surveillance camera,2,600.0
+washer dryer,1,1100.0
+home electric vehicle charge station,1,1200.0
+garage organizer system,1,3500.0
+natural gas boiler,1,6100.0
+sewer line cleaning,1,250.0
+soundproof room,1,2000.0
+bifacial solar panel,2,23100.0
+repair hot tub,1,250.0
+solar panel system,2,23100.0
+home theater room addition,2,25000.0
+basement window replacement,0,750.0
+pet odor removal service,0,650.0
+luxury vinyl tile floor,2,1600.0
+heat pump installation,2,8350.0
+cabinet installation,2,7000.0
+radiator repair,1,350.0
+spider exterminator,0,400.0
+clay tile roof,1,16901.0
+fireplace repair,1,600.0
+double pane window replacement,0,6700.0
+paint trim,1,1500.0
+shower repair,1,350.0
+install crown molding,1,3150.0
+wash machine installation,2,1100.0
+asbestos removal,0,500.0
+aluminum fence,1,7150.0
+brick tuckpointing,1,2000.0
+beaver removal,0,223.0
+drywall installation,2,2000.0
+fire pit,1,850.0
+mole extermination,0,400.0
+perc test,1,725.0
+spray foam insulation,1,20000.0
+cost raise house,1,50000.0
+tile grout cleaning,1,548.0
+outdoor light,1,3000.0
+drain line breakage repair,1,600.0
+repair tile roof,1,1800.0
+copper roof installation,2,47767.0
+saltwater hot tub installation,2,8500.0
+reupholster chair,1,650.0
+house demolition,0,10000.0
+paint kitchen,1,800.0
+backsplash installation,2,1000.0
+gable roof,1,19683.0
+asphalt driveway repair,1,750.0
+hybrid heat pump,1,9500.0
+sandblast,1,5250.0
+picture window installation,2,1019.0
+metal carport,1,7000.0
+swim pool water pump,2,1000.0
+age place remodel,2,9500.0
+foam roof installation,2,10000.0
+trellis installation,2,800.0
+pool closing,2,250.0
+wool carpet,1,3000.0
+foot privacy fence,1,4000.0
+attic insulation,1,2500.0
+home warranty,1,600.0
+architectural shingle roof,1,10500.0
+vinyl trim,1,176.0
+install electric baseboard heater,2,550.0
+install quartz countertop,2,3500.0
+install porcelain tile countertop,2,2500.0
+fence installation,2,4500.0
+attic squirrel removal,0,350.0
+build dock,2,15000.0
+deep house cleaning,1,300.0
+green roof,1,22000.0
+galvanized gutter installation,2,1472.0
+install gutter,2,3223.0
+silverfish extermination,0,400.0
+shutter installation,2,2400.0
+local mover,1,2500.0
+garden window installation,2,3000.0
+bathtub refinish,1,480.0
+grab bar installation,2,248.0
+berber carpet,1,900.0
+sprinkler system,1,5500.0
+build deck,2,14000.0
+air source heat pump,1,8350.0
+central air conditioner repair,1,375.0
+plaster repair,1,500.0
+bathroom design,1,12000.0
+install kitchen countertop,2,3000.0
+wallpaper removal,0,740.0
+paint room,1,1200.0
+install radiant floor heating,2,4000.0
+ventilation installation,2,4000.0
+air leak seal,0,4700.0
+metal roof repair,1,1250.0
+window replacement,0,800.0
+backyard pond,1,9000.0
+clawfoot tub installation,2,6000.0
+quartzite countertop installation,2,4200.0
+flea exterminator,0,270.0
+install downspout,2,1527.0
+evaporative cooling installation,2,2500.0
+wooden gutter,1,3223.0
+cooktop installation,2,650.0
+garbage disposal installation,2,500.0
+landscape stone,1,600.0
+ceramic tile floor installation,2,3500.0
+ceramic tile shower,1,2700.0
+water purification system,1,2500.0
+concrete delivery,1,700.0
+smart lock installation,2,300.0
+laundry room remodeling,2,7000.0
+septic tank cleaning,1,400.0
+lawn aeration,1,140.0
+window trim installation,2,176.0
+ant exterminator,0,250.0
+chimney liner installation,2,2500.0
+pressure wash deck,1,145.0
+draftsman,1,2000.0
+gopher removal,0,400.0
+concrete driveway paving,1,5184.0
+portable generator,1,1200.0
+building permit,2,550.0
+thin film solar panel,2,23100.0
+repair furnace,1,349.0
+home addition blueprint,2,2000.0
+reupholster couch,1,1700.0
+solid surface countertop installation,2,3000.0
+unclog kitchen sink,0,300.0
+hardwood floor installation,2,4017.0
+attic fan installation,2,450.0
+install tin roof,2,19250.0
+marble countertop,1,3500.0
+coyote removal,0,223.0
+pool opening,2,300.0
+mold remediation,0,3500.0
+land survey,1,600.0
+build storage shed,2,5653.0
+doggy door installation,2,400.0
+raccoon removal,0,223.0
+gravel driveway pave,1,2277.0
+lap pool,2,50000.0
+swim pool maintenance,2,500.0
+staircase repair,1,500.0
+bedroom remodel,2,21000.0
+install laminate flooring,2,2207.0
+tree plant,1,350.0
+bamboo floor installation,2,4000.0
+chimney cap replacement,0,425.0
+build greenhouse,2,10000.0
+wooden carport,1,8439.0
+storm window installation,2,2090.0
+mold inspection,0,500.0
+soil test,1,1200.0
+gutter repair,1,307.0
+vinyl plank flooring,1,1200.0
+clean gutter,1,300.0
+build swim pool,2,44688.0
+attic fan repair,1,300.0
+stamp concrete driveway installation,2,5184.0
+drape cleaning,1,180.0
+install ceramic tile countertop,2,3000.0
+retractable awning installation,2,2700.0
+flat roof installation,2,8000.0
+tankless water heater repair,1,375.0
+aluminum gutter installation,2,1427.0
+stone side installation,2,37500.0
+solar water heater repair,1,400.0
+fiberglass roof,1,7500.0
+sash window installation,2,826.0
+xeriscaping,1,17000.0
+wood window installation,2,1200.0
+metal roof installation,2,26500.0
+brown recluse extermination,0,400.0
+landscape,1,10000.0
+garage door opener installation,2,480.0
+home warranty florida,1,600.0
+energy audit,1,250.0
+fix leaky shower faucet,0,350.0
+marble backsplash,1,1000.0
+feng shui design,2,5500.0
+build asphalt driveway,2,5804.0
+stain deck,1,750.0
+housekeep,1,221.0
+radiator replacement,0,1500.0
+land clear building site preparation,2,2500.0
+recess lighting installation,2,1467.0
+unclog toilet,0,350.0
+centipede extermination,0,223.0
+hybrid solar system,1,23100.0
+retain wall building,2,5463.0
+garage remodel,2,11000.0
+ceiling lift installation,2,6000.0
+termite heat treatment,0,5000.0
+paint vinyl side,1,4200.0
+indoor swim pool installation,2,95000.0
+tile roof installation,2,19000.0
+holiday light installation,2,450.0
+furniture upholstery cleaning,1,180.0
+slide patio door installation,2,2756.0
+garbage disposal repair,1,200.0
+reslope landscaping,1,1800.0
+aluminum roof,1,19200.0
+ton air conditioner,1,6000.0
+piano move,1,1000.0
+porcelain tile floor installation,2,3500.0
+mansard roof,1,10000.0
+furnace,1,4800.0
+ceiling fan repair,1,145.0
+solar panel installation,2,23100.0
+smoke detector installation,2,112.0
+ductless air conditioner installation,2,6357.0
+door trim installation,2,175.0
+storm damage recovery,0,5200.0
+slide window installation,2,740.0
+repair wood side,1,1830.0
+infinity pool,2,98000.0
+roof eaves repair,1,900.0
+dryer repair,1,150.0
+tree trim,1,450.0
+wainscoting installation,2,3600.0
+roof underlayment replacement,0,900.0
+central humidifier,1,650.0
+elevator installation,2,50000.0
+mudroom addition,2,14500.0
+gas tankless water heater,1,2811.0
+repair roof leak,0,800.0
+install concrete countertop,2,3000.0
+swim pool leak,1,1000.0
+electric fireplace,1,750.0
+tennis court resurface,1,10000.0
+floor replacement,0,3500.0
+build entertainment center,1,9000.0
+squirrel removal,0,350.0
+architect,1,48500.0
+bathroom sink installation,1,750.0
+inground vinyl liner swim pool,2,45000.0
+scorpion extermination,0,223.0
+interior design,2,5500.0
+porcelain tile shower,1,2700.0
+install light switch,2,150.0
+paint ceiling,1,250.0
+shed roof replacement,0,800.0
+slate roof repair,1,900.0
+install electrical outlet,2,141.0
+lay stamp concrete patio,1,3073.0
+gas line installation,2,800.0
+outdoor kitchen,1,16000.0
+fountain installation,2,8000.0
+toilet repair,1,125.0
+shower door installation,2,8000.0
+deck repair,1,1500.0
+copper gutter installation,2,4500.0
+repair sprinkler system,1,210.0
+gas water heater,1,1900.0
+solar water heater installation,2,9000.0
+kitchen remodel,2,27000.0
+powder coating,1,200.0
+frame new roof,2,13650.0
+soapstone countertop installation,2,2550.0
+wire fence,1,2400.0
+chain link fence repair,1,500.0
+build patio,2,6000.0
+septic tank repair,1,2000.0
+build hospital,2,112.0
+pressure wash house,1,700.0
+interior demolition,0,2500.0
+peel stick vinyl flooring,1,1400.0
+install tankless water heater,2,2811.0
+sauna installation,2,4500.0
+carpet beetle extermination,0,250.0
+temporary power,1,2000.0
+wall cleaning service,1,600.0
+handyman,1,300.0
+plumb kitchen remodel,2,5500.0
+hvac installation,2,6000.0
+glue vinyl plank flooring,1,1200.0
+roof vent installation,2,450.0
+install electrical circuit panel upgrade,2,3000.0
+pellet stave installation,2,3000.0
+mulch delivery,1,175.0
+design new kitchen,2,27000.0
+shower tile,1,2700.0
+new boiler installation,2,6100.0
+ground swim pool,2,5000.0
+closet organization,1,2000.0
+install waterfall,2,15000.0
+water heater repair,1,450.0
+install refrigerator,2,1500.0
+ceramic tile backsplash installation,2,1000.0
+wpc vinyl flooring,1,1400.0
+polycrystalline solar panel,2,23100.0
+rent temporary fence,1,225.0
+skunk removal,0,450.0
+build shelter,2,5800.0
+asbestos side removal,0,500.0
+gas fireplace,1,9084.0
+repair roof,1,1150.0
+wood fence,1,4500.0
+microwave installation,2,380.0
+luxury vinyl plank floor,2,1600.0
+solar panel maintenance,2,400.0
+electric gate install,2,4000.0
+propane tank installation,2,2500.0
+cicada extermination,0,223.0
+basement staircase installation,2,2100.0
+hot tub installation,2,6900.0
+home ac recharge,1,400.0
+kitchen appliance repair,1,200.0
+steam shower installation,2,11000.0
+fill pool,2,7500.0
+water main repair,1,1000.0
+weed control service,1,100.0
+roach exterminator,0,300.0
+repair carpet,1,200.0
+concrete driveway repair,1,1250.0
+concrete leveling,1,1500.0
+skylight installation,2,1523.0
+subfloor repair,1,1600.0
+roof replacement,0,10000.0
+air conditioner installation,2,6000.0
+awning repair,1,670.0
+house cleaning,1,221.0
+french door,1,2221.0
+install security entry door,2,975.0
+install garage door,2,993.0
+patio repair,1,750.0
+driveway gate install,2,4000.0
+dock repair,1,15000.0
+stairlift installation,2,4000.0
+repair chimney crown,1,750.0
+overhead garage door installation,2,993.0
+electric furnace,1,2400.0
+ice dam removal,0,1200.0
+garage floor repair,1,1000.0
+paint kitchen cabinet,1,4000.0
+hurricane shutter,1,5200.0
+fox removal,0,223.0
+portable toilet,1,220.0
+tv mount installation,2,200.0
+evaporative cooler repair,1,250.0
+ton air conditioner,1,4500.0
+lawn maintenance,1,130.0
+ice maker repair,1,200.0
+asbestos test,1,500.0
+wood trim,1,176.0
+paint decorative finish wall,2,4800.0
+elevator repair,1,50000.0
+install window air condition,2,546.0
+home theater setup,2,25000.0
+wash machine repair,1,300.0
+plastic roof,1,10000.0
+window screen installation,2,200.0
+gutter guard installation,2,335.0
+marble floor install,2,3600.0
+mosquito misting system,1,2500.0
+dumpster rental,1,380.0
+dryer vent cleaning,1,150.0
+tentless termite treatment,0,520.0
+build treehouse,2,15000.0
+gardener,1,225.0
+electric tankless water heater,1,2811.0
+dishwasher repair,1,200.0
+sump pump repair,1,300.0
+groundhog removal,0,200.0
+earthquake retrofit,1,7000.0
+natural gas furnace,1,6000.0
+flat roof repair,1,700.0
+oil boiler,1,7500.0
+seamless gutter installation,2,1582.0
+home appraisal,1,400.0
+repair floor,1,1600.0
+stucco side installation,2,10500.0
+remove solar panel replace roof,1,3800.0
+solar panel system,2,23100.0
+geothermal heat installation,2,17300.0
+electrical outlet repair,1,140.0
+snake removal,0,350.0
+install pvc gutter,2,913.0
+vinyl window installation,2,575.0
+vinyl side,1,12000.0
+install water heater,2,1400.0
+outdoor spigot install,2,200.0
+build seating,1,27000.0
+brick paver driveway pave,1,6960.0
+pool deck,2,7500.0
+central air conditioner installation,2,8750.0
+chimney cleaning,1,400.0
+moth extermination,0,150.0
+tree prune,1,450.0
+stump grind,1,200.0
+oven installation,2,2000.0
+build cover patio,2,8500.0
+refinish furniture,2,800.0
+build gravel driveway,2,1750.0
+water damage restoration,0,3000.0
+repair sidewalk,1,2000.0
+unclog main sewer line,0,475.0
+replace subfloor,0,1600.0
+window blind,1,151.0
+room insulation,1,4700.0
+murder hornet extermination,0,223.0
+stone floor polish,1,1600.0
+fiberglass window installation,2,6750.0
+saltwater pool,2,50000.0
+hardwired computer network,1,3800.0
+vinyl fence,1,5800.0
+leaf clean,1,300.0
+rubber roof,1,15000.0
+refinish countertop,2,400.0
+bay window installation,2,3322.0
+build carport,2,8439.0
+install septic tank system,2,6100.0
+basement remodel,2,50000.0
+microwave repair,1,150.0
+retain wall repair,1,750.0
+repair skylight,1,500.0
+walk tub installation,2,6000.0
+disability remodel,2,6000.0
+arbor installation,2,3500.0
+oil furnace,1,4900.0
+home staging,1,1500.0
+ceiling fan installation,2,475.0
+slab leak repair,0,2500.0
+pave driveway,1,6960.0
+telephone jack installation,2,100.0
+cicada killer extermination,0,223.0
+click lock vinyl flooring,1,1200.0
+ceiling repair,1,450.0
+install bathroom fan,1,400.0
+asphalt roof shingle installation,2,12000.0
+repair foundation,1,5200.0
+electric fire boiler system,1,5000.0
+hvac inspection,1,237.0
+porcelain tile backsplash installation,2,1000.0
+paint aluminum side,1,4000.0
+apply paster,1,500.0
+stainless steel countertop installation,2,3000.0
+build pergola,2,4500.0
+popcorn ceiling removal,0,1700.0
+sod installation,2,6750.0
+range hood installation,2,714.0
+lawn fertilization,1,400.0
+mouse exterminator,0,525.0
+hog wire fence,1,2000.0
+remove wall,1,2500.0
+french drain installation,2,5000.0
+fiber cement side installation,2,15000.0
+repair brick stone side,1,1896.0
+bat removal,0,500.0
+air duct cleaning,1,500.0
+bed bug heat treatment,0,1000.0
+install wireless computer network,2,350.0
+basement waterproof,1,5000.0
+roof cleaning,1,612.0
+install storm door,2,450.0
+garage demolition,0,3500.0
+gas stove repair,1,200.0
+dutch roof,1,10000.0
+tick extermination,0,125.0
+swim pool enclosure,2,18000.0
+bathroom mirror installation,1,158.0
+vinyl side repair,1,200.0
+home conference room,1,3500.0
+phone system installation,2,100.0
+install stone slab countertop,1,3000.0
+chimney installation,2,6500.0
+thermostat installation,2,200.0
+post construction cleaning,1,650.0
+build shelve,1,2700.0
+living room remodel,2,8000.0
+radon test,1,1700.0
+home office,1,3500.0
+kitchen island installation,2,5000.0
+home warranty texas,1,600.0
+interior staircase installation,2,3563.0
+tree removal,0,435.0
+sump pump installation,2,1400.0
+mover,1,2500.0
+main water line installation,2,3750.0
+snow removal service,0,125.0
+install backup generator,2,15000.0
+egress window installation,2,3500.0
+wood shake roof installation,2,14250.0
+slate roof installation,2,40000.0
+home warranty california,1,600.0
+bedroom addition,2,50000.0
+pest control,0,223.0
+paint stairway,1,400.0
+gas furnace sqft house,1,4800.0
+build attach garage,2,37000.0
+watt solar panel,2,23100.0
+paint fence,1,2000.0
+butcher block countertop installation,2,3750.0
+asphalt driveway,1,468.0
+ton air conditioner,1,7500.0
+frame roof,1,13650.0
+stained glass repair,1,500.0
+swim pool fence,2,6500.0
+repair drywall,1,350.0
+concrete tile roof installation,2,10000.0
+dishwasher installation,2,1000.0
+junk removal service,0,300.0
+mulch,1,275.0
+repair stucco side,1,1700.0
+metal side installation,2,17000.0
+ton air conditioner,1,10000.0
+patio remodel,2,6000.0
+lawn seed,1,1500.0
+porch addition,2,20000.0
+biohazard cleanup,1,4000.0
+barn door installation,2,1658.0
+repair wood fence,1,500.0
+curtain installation,2,300.0
+vertical blind installation,2,151.0
+paint exterior door,1,156.0
+home inspection,1,400.0
+toilet installation,2,450.0
+artificial grass installation,2,4259.0
+vinyl tile flooring,1,1400.0
+composite roofing installation,2,20538.0
+basketball court installation,2,46650.0
+custom cabinet reface,2,8250.0
+paint living room,1,1200.0
+rainwater collection system,1,2500.0
+build playground,2,2500.0
+install laminate countertop,2,1050.0
+ductwork,1,9293.0
+pocket door installation,2,1050.0
+upgrade cable,2,3800.0
+paint interior door,1,150.0
+propane gas boiler,1,7000.0
+smart thermostat installation,2,300.0
+pellet stave repair,1,3000.0
+outdoor motion sensor light installation,2,400.0
+aluminum steel fence repair,1,800.0
+mobile home roof replacement,0,5500.0
+wallpaper installation,2,1000.0
+inground gunite concrete swimming pool,2,60000.0
+walk shower,1,8000.0
+window shade,1,540.0
+paint deck,1,600.0
+lead paint removal,0,15000.0
+lightning rod,1,1100.0
+bathroom addition,1,20000.0
+clean acoustic ceiling,1,221.0
+ramp installation,2,3000.0
+solar panel system,2,23100.0
+home insulation,1,4700.0
+pellet stave cleaning,1,3000.0
+propane furnace,1,4800.0
+roof snow removal,0,300.0
+wasp nest removal,0,390.0
+grid solar system,1,23100.0
+ground fiberglass swim pool,2,70000.0
+sink installation,2,600.0
+spc vinyl flooring,1,1400.0
+concrete removal,0,1856.0
+gas line repair,1,400.0
+home security system,1,1400.0
+carpet removal,0,186.0
+cedar side installation,2,18000.0
+bathroom remodel,1,12000.0
+paint hallway,1,575.0
+digital phone system,1,100.0
+roof inspection,1,426.0
+install replace bathtub,1,6000.0
+water softener installation,2,2500.0
+metal fence,1,4321.0
+rug cleaning,1,370.0
+door repair,1,202.0
+install tile floor,2,3500.0
+vole exterminator,0,223.0
+termite tenting,0,6250.0
+drywall ceiling installation,2,700.0
+custom closet installation,2,3500.0
+laminate floor repair,1,2207.0
+garage insulation,1,4500.0
+brick stone side installation,2,22500.0
+blow insulation,1,5000.0
+paint stucco,1,4000.0
+porch repair,1,850.0
+dumbwaiter installation,2,10000.0
+crawl space insulation,1,2000.0
+chimney repair,1,750.0
+fly exterminator,0,250.0
+privacy fence,1,5000.0
+electric water heater installation,2,1000.0
+professional organizer,1,300.0
+build ranch house,2,340.0
+repair countertop,1,350.0
+entry door installation,2,1353.0
+window glass replacement,0,375.0
+plumb bathroom remodel,1,5302.0
+chimney inspection,1,400.0
+weatherstrip,1,350.0
+crawl space repair,1,4500.0
+recycled glass countertop installation,2,4500.0
+bidet installation,2,1000.0
+window evaporative cooling,1,2500.0
+kitchen faucet installation,2,300.0
+side cleaning,1,700.0
+stump removal,0,380.0
+winterize sprinkler system,1,100.0
+oven repair,1,200.0
+repair side,1,1830.0
+furniture assembly,1,175.0
+wood boiler,1,6100.0
+ductless heat pump,1,4400.0
+install granite countertop,2,3500.0
+annual air conditioner maintenance,1,275.0
+solar panel system,2,23100.0
+burst pipe repair,0,500.0
+build natural pool,2,70000.0
+rat extermination,0,600.0
+air conditioner repair,1,375.0
+home gym,2,13500.0
+swim pool heater,2,3500.0
+swim pool water filter,2,1000.0
+structural engineer,1,1200.0
+pressure wash fence,1,180.0
+ductwork repair,1,600.0
+christmas light installation,2,450.0
+garage door repair,1,250.0
+ton air conditioner,1,8500.0
+shower regrouting,1,700.0
+wine cellar,2,33750.0
+bed bug exterminator,0,1000.0
+monocrystalline solar panel,2,23100.0
+vinyl sheet flooring,1,950.0
+central vacuum installation,2,2000.0
+earwig extermination,0,223.0
+possum removal,0,250.0

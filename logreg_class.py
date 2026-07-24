@@ -1,6 +1,8 @@
 import joblib
 
 import nltk
+import torch
+
 nltk.download('stopwords')
 nltk.download('punkt_tab')
 nltk.download('punkt')
@@ -35,10 +37,10 @@ class LogRegTfidfModel:
         self.pred_label = None
         self.pred_conf = None
         self.pred_number = None
-        self.up_model = joblib.load("tfidf_logreg_model_unprocessed.pkl")
-        self.p_model = joblib.load("tfidf_logreg_model_processed.pkl")
+        self.positive_or_negative = None
+        self.model = joblib.load("tfidf_logreg_model.pkl")
 
-    def processed_predict(self, text):
+    def predict(self, text):
         words = word_tokenize(text)
         filtered_words = [word for word in words if word.lower() not in stop_words]
 
@@ -51,7 +53,7 @@ class LogRegTfidfModel:
         lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) for word, tag in tagged]
         proc_text = [" ".join(lemmatized)]
 
-        pred, prob_arr = self.p_model.predict(proc_text), self.p_model.predict_proba(proc_text)[0]
+        pred, prob_arr = self.model.predict(proc_text), self.model.predict_proba(proc_text)[0]
 
         state = "Negative"
         if pred == 1:
@@ -63,18 +65,11 @@ class LogRegTfidfModel:
         self.pred_conf = (prob_arr[pred][0])
         self.pred_number = self.convert_label_to_numb()
 
-    def unprocessed_predict(self, text):
-        pred, prob_arr = self.up_model.predict([text]), self.up_model.predict_proba([text])[0]
-
-        state = "Negative"
-        if pred == 1:
-            state = "Neutral"
-        elif pred == 2:
-            state =  "Positive"
-
-        self.pred_label = state
-        self.pred_conf = (prob_arr[pred][0])
-        self.pred_number = self.convert_label_to_numb()
+        pos_neg = torch.argmax(torch.tensor([prob_arr[0], prob_arr[2]]))
+        if pos_neg == 1:
+            self.positive_or_negative = 2
+        else:
+            self.positive_or_negative = 0
 
 
     def print_prediction(self):

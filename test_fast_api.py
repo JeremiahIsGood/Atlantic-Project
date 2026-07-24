@@ -15,7 +15,7 @@ async def root():
 
 @app.post("/sentiment/logreg/predict")
 async def logreg_predict(description: str = Body(embed=False)):
-    logreg.processed_predict(description)
+    logreg.predict(description)
     return {"sentiment" : logreg.pred_label}
 
 @app.post("/sentiment/finetuned/predict")

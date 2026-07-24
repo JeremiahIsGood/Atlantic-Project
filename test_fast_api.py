@@ -15,10 +15,10 @@ async def root():
 
 @app.post("/sentiment/logreg/predict")
 async def logreg_predict(description: str = Body(embed=False)):
-    logreg.predict(description)
+    logreg.processed_predict(description)
     return {"sentiment" : logreg.pred_label}
 
-@app.post("sentiment/finetuned/predict")
+@app.post("/sentiment/finetuned/predict")
 async def finetuned_predict(description: str = Body(embed=False)):
     ft_roberta.predict(description)
     return {"sentiment" : ft_roberta.pred_label}

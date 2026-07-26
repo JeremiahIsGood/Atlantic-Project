@@ -37,7 +37,6 @@ class LogRegTfidfModel:
         self.pred_label = None
         self.pred_conf = None
         self.pred_number = None
-        self.positive_or_negative = None
         self.model = joblib.load("tfidf_logreg_model.pkl")
 
     def predict(self, text):
@@ -62,14 +61,19 @@ class LogRegTfidfModel:
             state =  "Positive"
 
         self.pred_label = state
-        self.pred_conf = (prob_arr[pred][0])
+        self.pred_conf = prob_arr[pred][0]
         self.pred_number = self.convert_label_to_numb()
 
-        pos_neg = torch.argmax(torch.tensor([prob_arr[0], prob_arr[2]]))
-        if pos_neg == 1:
-            self.positive_or_negative = 2
-        else:
-            self.positive_or_negative = 0
+        if self.pred_number == 1 and self.pred_conf < .6:
+            pos_neg = torch.argmax(torch.tensor([prob_arr[0], prob_arr[2]]))
+            if pos_neg == 1:
+                self.pred_number = 2
+            else:
+                self.pred_number = 0
+
+            self.pred_label = self.convert_to_label()
+            self.pred_conf = prob_arr[self.pred_number][0]
+
 
 
     def print_prediction(self):

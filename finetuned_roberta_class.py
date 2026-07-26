@@ -51,7 +51,7 @@ class FTRobertaModel:
         self.pred_number = None
         self.pred_label = None
         self.probs = None
-        self.pred = None
+        self.pred_conf = None
         self.positive_or_negative = None
 
     def predict(self, text):
@@ -69,17 +69,33 @@ class FTRobertaModel:
         self.probs = torch.softmax(logits, dim=1)[0]
         self.pred_number = torch.argmax(self.probs)
         self.pred_label = convert_to_label(self.pred_number)
-        self.pred = {
-            "Negative": self.probs[0],
-            "Neutral": self.probs[1],
-            "Positive": self.probs[2]
-        }
-        pos_neg = torch.argmax(torch.tensor([self.probs[0].detach(), self.probs[2].detach()]))
-        if pos_neg == 1:
-            self.positive_or_negative = 2
-        else:
-            self.positive_or_negative = 0
+        self.pred_conf = self.probs[self.pred_number]
+
+        if self.pred_number == 1 and self.pred_conf < .6:
+            pos_neg = torch.argmax(torch.tensor([self.probs[0].detach(), self.probs[2].detach()]))
+            if pos_neg == 1:
+                self.pred_number = 2
+            else:
+                self.pred_number = 0
+
+            self.pred_label = self.convert_to_label()
+            self.pred_conf = self.probs[self.pred_number]
+
+        self.pred_number = self.pred_number.detach().tolist()
 
     def print_prediction(self):
         print(f"\n** Roberta Model **\nPredicted Sentiment: {self.pred_label}\nConfidence: %{(self.probs[self.pred_number] * 100):.2f}")
 
+    def convert_to_label(self):
+        if self.pred_number == 0:
+            return "Negative"
+        elif self.pred_number == 1:
+            return "Neutral"
+        return "Positive"
+
+    def convert_label_to_numb(self):
+        if self.pred_label == "Negative":
+            return 0
+        elif self.pred_label == "Neutral":
+            return 1
+        return 2

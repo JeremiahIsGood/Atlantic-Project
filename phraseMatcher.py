@@ -4,7 +4,7 @@ import spacy
 from spacy.matcher import PhraseMatcher, Matcher, DependencyMatcher
 nlp = spacy.load("en_core_web_sm")
 from itertools import combinations
-import gensim
+from gensim.models import Word2Vec
 
 import nltk
 nltk.download('stopwords')
@@ -17,7 +17,7 @@ nltk.download('averaged_perceptron_tagger_eng')
 from nltk.stem import WordNetLemmatizer, PorterStemmer
 from nltk.corpus import stopwords
 from nltk.corpus import wordnet
-from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.tokenize import word_tokenize
 
 def get_pattern(text):
   split_text = text.split()
@@ -49,6 +49,7 @@ def get_pattern(text):
   return patterns
 
 lemmatizer = WordNetLemmatizer()
+stemmer = PorterStemmer()
 stop_words = set(stopwords.words("english"))
 stop_words -= {"no", "nor", "not", "never",
     "none", "nothing", "nobody", "neither"}
@@ -64,71 +65,97 @@ def get_wordnet_pos(tag):
         return wordnet.ADV
     return wordnet.NOUN
 
-def tokenize_text(new_df):
-    new_df["text"] = new_df["text"].astype('string')
+def tokenize_text(sentence):
+    if sentence:
+        words = word_tokenize(sentence)
+        filtered_words = [word.lower() for word in words if word.lower() not in stop_words]
 
-    processed_list = []
-    bad_idx = []
-    for idx, sentence in enumerate(new_df['text']):
-        if sentence:
-            words = word_tokenize(sentence)
-            filtered_words = [word for word in words if word.lower() not in stop_words]
+        tokens = [t for t in filtered_words if t.isalpha()]
 
-            tokens = [t for t in filtered_words if t.isalpha()]
+        filtered_tokens = [t for t in tokens if t not in stop_words]
 
-            filtered_tokens = [t for t in tokens if t not in stop_words]
+        tagged = nltk.pos_tag(filtered_tokens)
 
-            tagged = nltk.pos_tag(filtered_tokens)
+        lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) for word, tag in tagged]
 
-            lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) for word, tag in tagged]
+        text = " ".join(lemmatized)
 
-            text = " ".join(lemmatized)
-            if text.strip() == "":
-                bad_idx.append(idx)
-            else:
-                processed_list.append(text)
-        else:
-            bad_idx.append(idx)
-    new_df = new_df.drop(index=bad_idx).reset_index(drop=True)
-
-    new_df.insert(1,"processed_text", processed_list)
-    new_df = new_df.drop(columns=["text"])
-    return new_df
+        return text
+    return None
 
 class HouseMatcher():
     def __init__(self):
         self.predicted_item = None
         self.df = pd.read_csv("cleaned_house_repair_dataset.csv")
-        self.data = [text.split() for text in self.df["item"].values]
         self.matcher = Matcher(nlp.vocab)
-        self.word2vec_model = gensim.models.Word2Vec(self.data, min_count=1,
-                                                     vector_size=200, window=10)
+        self.word2vec_model = Word2Vec.load("word2vec.model")
+
         for item in self.df["item"].values:
-          self.matcher.add(item.upper().replace(" ", "_"), get_pattern(item))
+            self.matcher.add(str(item).upper().replace(" ", "_"), get_pattern(str(item)))
 
     def lookup_item(self, sentence):
-      sentence = tokenize_text(sentence)
-      doc = nlp(sentence)
+      words = tokenize_text(sentence)
+      doc = nlp(words)
       matches = self.matcher(doc)
 
       lookup_items = []
       for match_id, start, end in matches:
         string_id = nlp.vocab.strings[match_id]
         lookup_items.append(string_id.lower().replace("_", " "))
-      total_list = []
 
+      total_list = []
       for item in lookup_items:
-        similarity = 0
-        for i in item.split():
-          for word in sentence.split():
-            try:
-              similarity += self.word2vec_model.wv.similarity(i, word)
-            except KeyError:
-              similarity += 0
-        total_list.append(similarity / len(item.split()))
+
+        similarity = self.word2vec_model.wv.n_similarity(item.split(), words.split(" "))
+        # print(f"Similarity: {similarity} for item: {item} and sentence: {words.split(' ')}")
+        total_list.append(similarity)
+
 
       if total_list:
-        predicted_item = lookup_items[np.argmax(total_list)]
+        maxim = np.max(total_list)+.05
+        minim = np.max(total_list)-.05
+        predicted_items = [idx for idx, sentiment in enumerate(total_list) if maxim > sentiment > minim]
 
-        self.predicted_item = self.df.loc[self.df["sentiment"] == predicted_item]
+        pred = np.argmax(total_list, axis=0)
+        predicted_item = lookup_items[pred]
+
+
+        lookup_items = np.array(lookup_items)
+        item_vocab = list(lookup_items[predicted_items])
+
+        common_words = [voc for voc in item_vocab if item_vocab.count(voc) > (len(predicted_items) * .5)]
+        sentence_words = [word for word in words.split() if word not in common_words]
+        removed_common_words = [voc for voc in item_vocab if voc not in common_words]
+
+        print(lookup_items[predicted_items])
+        print(sentence_words)
+        print(removed_common_words)
+
+        if len(lookup_items[predicted_items]) > 1:
+            skewed_list = []
+            if sentence_words and removed_common_words:
+                for word in removed_common_words:
+                    similarity = self.word2vec_model.wv.n_similarity([word], sentence_words)
+                    print(f"Similarity: {similarity} for word '{word}' and sentence: {sentence_words}")
+                    skewed_list.append(similarity)
+
+            pred_idx = np.argmax(skewed_list, axis=0)
+            predicted_item = lookup_items[predicted_items[pred_idx]]
+
+        pred_similarity = self.word2vec_model.wv.n_similarity(predicted_item.split(" "), words.split(" "))
+        print(f"Final Prediction\nSimilarity: {pred_similarity} for '{predicted_item}' and sentence: {sentence}")
+
+        if pred_similarity < 0.75:
+            return None
+
+        item = self.df.loc[self.df["item"] == predicted_item]
+
+        if len(item) > 1:
+            self.predicted_item = item.loc[item["avg_cost"] == item["avg_cost"].median()]
+        else:
+            self.predicted_item = item
+
+        return self.predicted_item
+
+      return None
 

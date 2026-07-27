@@ -1,5 +1,6 @@
 from typing import List
 
+import numpy as np
 import pandas as pd
 from fastapi import FastAPI, Body
 import uvicorn
@@ -44,6 +45,7 @@ async def finetuned_predict(description: str = Body(embed=False)):
     for sent in sentences:
         ft_roberta.predict(sent)
         sentiment_list.append(ft_roberta.pred_number)
+        print(ft_roberta.probs)
     return {"sentimentList" : sentiment_list}
 
 @app.post("/house/lookup")
@@ -53,11 +55,11 @@ async def house_lookup(description: str = Body(embed=False)):
     for sent in sentences:
         item = matcher.lookup_item(sent)
         if item is not None:
-            item_list.append(item.to_dict(orient="records"))
+            item_list.append(item.values.tolist()[0])
         else:
             item_list.append(None)
 
-    return {"itemList": (item_list)}
+    return {"itemList": item_list}
 
 if __name__ == "__main__":
     uvicorn.run("test_fast_api:app", host="127.0.0.1", port=8000, reload=True)

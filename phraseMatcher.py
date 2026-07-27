@@ -59,8 +59,6 @@ def get_wordnet_pos(tag):
         return wordnet.ADJ
     elif tag.startswith('V'):
         return wordnet.VERB
-    elif tag.startswith('N'):
-        return wordnet.NOUN
     elif tag.startswith('R'):
         return wordnet.ADV
     return wordnet.NOUN
@@ -112,40 +110,45 @@ class HouseMatcher():
 
 
       if total_list:
-        maxim = np.max(total_list)+.05
-        minim = np.max(total_list)-.05
-        predicted_items = [idx for idx, sentiment in enumerate(total_list) if maxim > sentiment > minim]
+        minim = np.max(total_list)-.10
+        predicted_items = [idx for idx, sentiment in enumerate(total_list) if sentiment > minim]
 
         pred = np.argmax(total_list, axis=0)
         predicted_item = lookup_items[pred]
 
 
         lookup_items = np.array(lookup_items)
-        item_vocab = list(lookup_items[predicted_items])
+        item_vocab = list(tokenize_text(" ".join(lookup_items[predicted_items])).split(" "))
 
-        common_words = [voc for voc in item_vocab if item_vocab.count(voc) > (len(predicted_items) * .5)]
+        common_words = [voc for voc in item_vocab if item_vocab.count(voc) > (len(predicted_items) * .6) and item_vocab.count(voc) < (len(predicted_items) * .8)]
         sentence_words = [word for word in words.split() if word not in common_words]
-        removed_common_words = [voc for voc in item_vocab if voc not in common_words]
+        removed_common_words = []
+        for item in [voc.split() for voc in lookup_items[predicted_items]]:
+            item_removed = []
+            for word in item:
+                if word not in common_words:
+                    item_removed.append(tokenize_text(word))
+            removed_common_words.append(item_removed)
 
-        print(lookup_items[predicted_items])
-        print(sentence_words)
-        print(removed_common_words)
+        print("Common: ",common_words)
+        print("Removed: ",removed_common_words)
 
         if len(lookup_items[predicted_items]) > 1:
             skewed_list = []
             if sentence_words and removed_common_words:
                 for word in removed_common_words:
-                    similarity = self.word2vec_model.wv.n_similarity([word], sentence_words)
+                    similarity = self.word2vec_model.wv.n_similarity(word, sentence_words)
                     print(f"Similarity: {similarity} for word '{word}' and sentence: {sentence_words}")
                     skewed_list.append(similarity)
 
-            pred_idx = np.argmax(skewed_list, axis=0)
-            predicted_item = lookup_items[predicted_items[pred_idx]]
+            if skewed_list:
+                pred_idx = np.argmax(skewed_list, axis=0)
+                predicted_item = lookup_items[predicted_items[pred_idx]]
 
         pred_similarity = self.word2vec_model.wv.n_similarity(predicted_item.split(" "), words.split(" "))
         print(f"Final Prediction\nSimilarity: {pred_similarity} for '{predicted_item}' and sentence: {sentence}")
 
-        if pred_similarity < 0.75:
+        if pred_similarity < 0.8:
             return None
 
         item = self.df.loc[self.df["item"] == predicted_item]

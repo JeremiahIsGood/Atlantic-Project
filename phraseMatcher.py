@@ -59,8 +59,6 @@ def get_wordnet_pos(tag):
         return wordnet.ADJ
     elif tag.startswith('V'):
         return wordnet.VERB
-    elif tag.startswith('R'):
-        return wordnet.ADV
     return wordnet.NOUN
 
 def tokenize_text(sentence):
@@ -74,7 +72,7 @@ def tokenize_text(sentence):
 
         tagged = nltk.pos_tag(filtered_tokens)
 
-        lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) for word, tag in tagged]
+        lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) for word, tag in tagged if not tag.startswith('R')]
 
         text = " ".join(lemmatized)
 
@@ -119,31 +117,80 @@ class HouseMatcher():
 
         lookup_items = np.array(lookup_items)
         item_vocab = list(tokenize_text(" ".join(lookup_items[predicted_items])).split(" "))
+        #words like need and this are causing the similarities to be different from what it should. I found this by doing "the roof needs replacement". however needs was causing it to choose a different answer
+        unneeded_lookup_words = [
+            "need", "want", "require",
+            "required", "requiring",
+            "must", "should", "have",
+            "ask", "look",
+            "wish", "desire", "prefer",
+            "expect", "insist", "demand",
+            "entail", "involve", "necessitate",
+            "obligatory", "mandatory",
+            "essential", "necessary", "requisite"
+        ]
 
-        common_words = [voc for voc in item_vocab if item_vocab.count(voc) > (len(predicted_items) * .6) and item_vocab.count(voc) < (len(predicted_items) * .8)]
-        sentence_words = [word for word in words.split() if word not in common_words]
+        common_words = [voc for voc in item_vocab if item_vocab.count(voc) > (len(predicted_items) * .65)]
+        sentence_words = [word for word in words.split() if (word not in common_words) and (word not in unneeded_lookup_words)]
         removed_common_words = []
+        remove_predicted_items = []
         for item in [voc.split() for voc in lookup_items[predicted_items]]:
-            item_removed = []
-            for word in item:
-                if word not in common_words:
-                    item_removed.append(tokenize_text(word))
-            removed_common_words.append(item_removed)
+            count = 0
+            for common_word in common_words:
+                if common_word in item:
+                    count += 1
 
-        print("Common: ",common_words)
-        print("Removed: ",removed_common_words)
+            if count > 0:
+                item_removed = []
+                for word in item:
+                    if word not in common_words:
+                        if word not in unneeded_lookup_words:
+                            item_removed.append(tokenize_text(word))
 
+                removed_common_words.append(item_removed)
+            else:
+                remove_predicted_items.append(item)
+
+        remove_predicted_items = [" ".join(item) for item in remove_predicted_items]
+        predicted_items = [pred_idx for pred_idx in predicted_items if lookup_items[pred_idx] not in remove_predicted_items]
+
+        #get the most similiar without removing common words and after that get the the amount in range of .5 and re do the same thing with removed common words.
         if len(lookup_items[predicted_items]) > 1:
             skewed_list = []
+            word_list = []
             if sentence_words and removed_common_words:
                 for word in removed_common_words:
-                    similarity = self.word2vec_model.wv.n_similarity(word, sentence_words)
-                    print(f"Similarity: {similarity} for word '{word}' and sentence: {sentence_words}")
-                    skewed_list.append(similarity)
+                    if not word:
+                        skewed_list.append(1)
+                    else:
+                        similarity = self.word2vec_model.wv.n_similarity(word, sentence_words)
+                        print(f"Similarity: {similarity} for word '{word}' and sentence: {sentence_words}")
+                        word_list.append(word)
+                        skewed_list.append(similarity)
 
             if skewed_list:
-                pred_idx = np.argmax(skewed_list, axis=0)
-                predicted_item = lookup_items[predicted_items[pred_idx]]
+                indexes = np.arange(0, len(skewed_list), 1)
+                top3_max = sorted(zip(skewed_list, word_list, indexes), reverse=True)[:3]
+                new_skewed_list = []
+                new_indexes_skewed = []
+                for simil, words_l, index in top3_max:
+                    word_count = 0
+                    for word in words_l:
+                        if word not in sentence_words:
+                            word_count += 1
+
+                    if word_count > 0:
+                        simil -= .10 * word_count
+                        new_skewed_list.append(simil)
+                        new_indexes_skewed.append(index)
+
+                print(new_skewed_list)
+                if new_skewed_list:
+                    pred_idx = np.argmax(new_skewed_list, axis=0)
+                    predicted_item = lookup_items[predicted_items[new_indexes_skewed[pred_idx]]]
+                else:
+                    pred_idx = np.argmax(skewed_list, axis=0)
+                    predicted_item = lookup_items[predicted_items[pred_idx]]
 
         pred_similarity = self.word2vec_model.wv.n_similarity(predicted_item.split(" "), words.split(" "))
         print(f"Final Prediction\nSimilarity: {pred_similarity} for '{predicted_item}' and sentence: {sentence}")

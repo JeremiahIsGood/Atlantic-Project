@@ -11,9 +11,9 @@ class RandomForestModel:
         self.inputs = None
 
     def predict(self, inputs):
-        self.inputs = np.array(inputs).reshape(1, -1)
+        self.inputs = np.array(inputs).reshape(1, -1) #get inputs and reshape so that it is not [1, 2, 3] but [[1, 2, 3]]
         self.pred_value = self.model.predict(self.inputs)[0] * INFLATION_FACTOR
-        return self.pred_value
+        return self.pred_value #I multiply the prediction value by an inflation factor.
 
     def print_prediction(self):
         print(f"Random Forest Model House Price Prediction: ${self.pred_value}")

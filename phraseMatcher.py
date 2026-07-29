@@ -19,24 +19,24 @@ from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 from nltk.tokenize import word_tokenize
 
-def get_pattern(text):
+def get_pattern(text): # I split the item and use combinations to create multiple combinations. I do this to do order and when some of the words are not all included.
   split_text = text.split()
   length = len(split_text)
   split_text += split_text
 
-  comb_list = set(list(combinations(split_text, length)) +(list(combinations(split_text, length-1))))
+  comb_list = set(list(combinations(split_text, length)) +(list(combinations(split_text, length-1)))) # I use set to remove duplicates
   bad_values = set()
 
-  for comb in comb_list:
+  for comb in comb_list: #I also remove ones where it may not be duplicated but has words that appear more than once in one thing.
     tokens = []
     for tok in comb:
       if tok in tokens:
         bad_values.add(comb)
       else:
         tokens.append(tok)
-  comb_list = list(comb_list - bad_values)
+  comb_list = list(comb_list - bad_values) #I set the new set
 
-  patterns = []
+  patterns = [] #I get patterns using this. I get the lemma of each token and do fuzzy to allow for some differences.
   for comb in comb_list:
     if comb:
       pattern = []
@@ -44,7 +44,7 @@ def get_pattern(text):
         pattern.append({
             "LEMMA": {"FUZZY": tok}
         })
-      patterns.append(pattern)
+      patterns.append(pattern) #I return the list of patterns.
 
   return patterns
 
@@ -72,13 +72,26 @@ def tokenize_text(sentence):
 
         tagged = nltk.pos_tag(filtered_tokens)
 
-        lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) for word, tag in tagged if not tag.startswith('R')]
+        lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) for word, tag in tagged if not tag.startswith('R')] #I don't include tokens that are adverbs.
 
         text = " ".join(lemmatized)
 
         return text
     return None
 
+def remove_j_not_common(sentence, common_words):
+    tagged = nltk.pos_tag(sentence.split(" "))
+
+    lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) for word, tag in tagged if word not in common_words and not tag.startswith('J')] #I remove adjectives if they are not in the common words.
+    #I was having an issue where it was removing bed from bed bug, but bed was a common word, so this makes it so it is not removed.
+
+    text = " ".join(lemmatized)
+
+    return text
+
+# https://medium.com/bi3-technologies/advance-text-matching-with-spacy-and-python-40b558c51413 I used this website when deciding what type of matcher to use.
+# https://spacy.io/api/matcher/
+# https://www.ancisoft.com/blog/using-phrasematcher-in-spacy-to-find-multiple-match-types/#prerequisites this was useful in learning how to create
 class HouseMatcher():
     def __init__(self):
         self.predicted_item = None
@@ -86,15 +99,15 @@ class HouseMatcher():
         self.matcher = Matcher(nlp.vocab)
         self.word2vec_model = Word2Vec.load("word2vec.model")
 
-        for item in self.df["item"].values:
+        for item in self.df["item"].values: #I add to the matcher with keys like "ROOF_REPAIR" from "roof repair"
             self.matcher.add(str(item).upper().replace(" ", "_"), get_pattern(str(item)))
 
     def lookup_item(self, sentence):
-      words = tokenize_text(sentence)
+      words = tokenize_text(sentence) #I tokenize the text. using nlp, for doc in token if doc.lemma_ or doc.text and stuff can be done, but I wanted to use this for more customality
       doc = nlp(words)
-      matches = self.matcher(doc)
+      matches = self.matcher(doc) #for each token in the i am matching it.
 
-      lookup_items = []
+      lookup_items = [] #I look up the matches using the match_id. I reverse what we did earlier.
       for match_id, start, end in matches:
         string_id = nlp.vocab.strings[match_id]
         lookup_items.append(string_id.lower().replace("_", " "))
@@ -103,7 +116,7 @@ class HouseMatcher():
       for item in lookup_items:
 
         similarity = self.word2vec_model.wv.n_similarity(item.split(), words.split(" "))
-        # print(f"Similarity: {similarity} for item: {item} and sentence: {words.split(' ')}")
+        print(f"Similarity: {similarity} for item: {item} and sentence: {words.split(' ')}")
         total_list.append(similarity)
 
 
@@ -131,7 +144,7 @@ class HouseMatcher():
         ]
 
         common_words = [voc for voc in item_vocab if item_vocab.count(voc) > (len(predicted_items) * .65)]
-        sentence_words = [word for word in words.split() if (word not in common_words) and (word not in unneeded_lookup_words)]
+        sentence_words = [word for word in remove_j_not_common(words, common_words).split() if (word not in common_words) and (word not in unneeded_lookup_words)]
         removed_common_words = []
         remove_predicted_items = []
         for item in [voc.split() for voc in lookup_items[predicted_items]]:
@@ -170,7 +183,8 @@ class HouseMatcher():
 
             if skewed_list:
                 indexes = np.arange(0, len(skewed_list), 1)
-                top3_max = sorted(zip(skewed_list, word_list, indexes), reverse=True)[:3]
+                top3_max = sorted(zip(skewed_list, word_list, indexes), reverse=True)[:3] #this sorts by the first item which is similarity list.
+                #I get the top 3 similarities
                 new_skewed_list = []
                 new_indexes_skewed = []
                 for simil, words_l, index in top3_max:
@@ -180,7 +194,7 @@ class HouseMatcher():
                             word_count += 1
 
                     if word_count > 0:
-                        simil -= .10 * word_count
+                        simil -= .10 * word_count #I reduce the similarity by .10 based on the amount of words not in the sentence words.
                         new_skewed_list.append(simil)
                         new_indexes_skewed.append(index)
 
@@ -196,12 +210,12 @@ class HouseMatcher():
         print(f"Final Prediction\nSimilarity: {pred_similarity} for '{predicted_item}' and sentence: {sentence}")
 
         if pred_similarity < 0.8:
-            return None
+            return None #the prediction must be at least .8
 
         item = self.df.loc[self.df["item"] == predicted_item]
 
         if len(item) > 1:
-            self.predicted_item = item.loc[item["avg_cost"] == item["avg_cost"].median()]
+            self.predicted_item = item.loc[item["avg_cost"] == item["avg_cost"].median()] #I get the median cost of the items if dataframe has more than one row
         else:
             self.predicted_item = item
 

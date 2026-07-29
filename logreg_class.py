@@ -40,6 +40,7 @@ class LogRegTfidfModel:
         self.model = joblib.load("tfidf_logreg_model.pkl")
 
     def predict(self, text):
+        #i tokenize the text they add.
         words = word_tokenize(text)
         filtered_words = [word for word in words if word.lower() not in stop_words]
 
@@ -64,7 +65,7 @@ class LogRegTfidfModel:
         self.pred_conf = prob_arr[pred][0]
         self.pred_number = self.convert_label_to_numb()
 
-        if self.pred_number == 1 and self.pred_conf < .6:
+        if self.pred_number == 1 and self.pred_conf < .6: # if confidence for neutral is below 60% than use positive or negative.
             pos_neg = torch.argmax(torch.tensor([prob_arr[0], prob_arr[2]]))
             if pos_neg == 1:
                 self.pred_number = 2
